@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm> 
+#include <iomanip>
 using namespace std;
 int n,i;
 float result = 0;
@@ -32,6 +33,6 @@ int main(){
         }
     }
     float a = result/n;
-    cout << a*100.000;
+    cout << fixed << setprecision(3) << a*100.000;
 
 }

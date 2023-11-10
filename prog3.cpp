@@ -1,38 +1,43 @@
 #include <iostream>
 #include <string>
-#include <algorithm> 
+#include <algorithm>
 #include <iomanip>
 using namespace std;
-int n,i;
+string matrix[1000];
+int results[1000];
+int n;
 float result = 0;
-string palindrome = "";
-int PalindromeLength;
+string palindrome;
 int main(){
-    int n;
-    cin >> n;
+    cin >> n; 
     cin.sync();
-    for(i=1;i<=n;i++){
-        string palindrome = "";
-        getline(cin,palindrome);
-        if(palindrome.empty()){cout << "empty";continue;}
-        PalindromeLength = palindrome.length();
-        if(PalindromeLength > 20){
-            cout << "error";
+    for(int i = 0;i<n;i++){
+        getline(cin,matrix[i]);
+        if(matrix[i].empty()){results[i] = 2;}
+    }
+    for(int j = 0;j<n;j++){
+        if(results[j]==2){continue;}
+        palindrome = matrix[j];
+        int palindromeLength = palindrome.length();
+        if(palindromeLength > 20){
+            results[j] = 3;
             continue;
         }
         string temp = palindrome;
         reverse(palindrome.begin(), palindrome.end()); 
         if(temp == palindrome){
-            cout << "yes";
+            results[j] = 1;
             result = result + 1.0;
             continue;
         }
-        else{
-            cout << "no";
-            continue;
-        }
+        else{results[j] = 0;}
+    }
+    for(int k = 0;k<n;k++){
+        if(results[k]==0){cout << "no\n";continue;}
+        if(results[k]==1){cout << "yes\n";continue;}
+        if(results[k]==2){cout << "empty\n";continue;}
+        if(results[k]==3){cout << "error\n";continue;}
     }
     float a = result/n;
-    cout << fixed << setprecision(3) << a*100.000;
-
+    cout << fixed << setprecision(3) << a*100;
 }

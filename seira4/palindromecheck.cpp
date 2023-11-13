@@ -16,21 +16,21 @@ int main(){
         if(matrix[i].empty()){results[i] = 2;}
     }
     for(int j = 0;j<n;j++){
-        if(results[j]==2){continue;}
         palindrome = matrix[j];
         int palindromeLength = palindrome.length();
         if(palindromeLength > 20){
             results[j] = 3;
-            continue;
         }
-        string temp = palindrome;
-        reverse(palindrome.begin(), palindrome.end()); 
-        if(temp == palindrome){
-            results[j] = 1;
-            result = result + 1.0;
-            continue;
+        if(palindromeLength>0 && palindromeLength<21){
+            string temp = palindrome;
+            reverse(palindrome.begin(), palindrome.end()); 
+            if(temp == palindrome){
+                results[j] = 1;
+                result = result + 1.0;
+                continue;
+            }
+            else{results[j] = 0;}
         }
-        else{results[j] = 0;}
     }
     for(int k = 0;k<n;k++){
         if(results[k]==0){cout << "no\n";continue;}

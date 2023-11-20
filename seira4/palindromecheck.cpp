@@ -10,7 +10,7 @@ float result = 0;
 string palindrome;
 int main(){
     cin >> n; 
-    cin.sync();
+    cin.ignore();
     for(int i = 0;i<n;i++){
         getline(cin,matrix[i]);
         if(matrix[i].empty()){results[i] = 2;}

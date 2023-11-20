@@ -45,6 +45,6 @@ int main(){
     for(i=0;i<n;i++){
         if(grammesmax[i] > z){z = grammesmax[i];} /*Elegxws tou pinaka twn mikroterwn kathe grammhs gia na ton megalytero*/
     }
-    cout << z;
+    cout << z << endl;
 
 }

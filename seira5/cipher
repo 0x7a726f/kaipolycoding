@@ -24,7 +24,7 @@ int main(){
     }
     for(i=0;i<26;i++){
         int count = 0;
-        for(j=1;j<26;j++){
+        for(j=0;j<26;j++){
             if((int)cipherlist[j]-(int)'a'-i == 0){count+=1;}
         }
         if(count>1){skip=1;break;}

@@ -2,10 +2,7 @@
 #include <string>
 using namespace std;
 char cipher(char gramma , int distance){return gramma + distance;}
-char lower(char ch) {
-    if(ch >= 'A' || ch <= 'Z'){return ch - 'A' + 'a';}
-    else{return ch;}
-    }
+char lower(char ch) {return ch - 'A' + 'a';}
 int distancelist[26];
 char cipherlist[26];
 int i,j;

@@ -2,7 +2,7 @@
 using namespace std;
 int matrix[151][151];
 int sums[305];
-int i,j;
+int i,j,k;
 int main(){
     int n;
     cin >> n;
@@ -16,33 +16,47 @@ int main(){
         }
         cin.ignore();
     }
-
-    for(i=0;i<n;i++){
-        sums[i] = 0;
+    int contains = 0;
+    int skip = 0;
+    for(i=0;i<n*n;i++){
         for(j=0;j<n;j++){
-            sums[i] += matrix[i][j];
+            if(skip == 1){break;}
+            for(k=0;k<n;k++){
+                int temp;
+                temp = matrix[j][k];
+                if(i == temp){contains += 1;skip = 0;break;}    
+            }    
         }
     }
-
-    for(i=0;i<n;i++){
-        sums[i+n] = 0;
-        for(j=0;j<n;j++){
-            sums[i+n] += matrix[j][i];
+    if(contains != n*n){cout << "no" << endl;}
+    else{
+        for(i=0;i<n;i++){
+            sums[i] = 0;
+            for(j=0;j<n;j++){
+                sums[i] += matrix[i][j];
+            }
         }
-    }
 
-    sums[2*n] = 0;
-    for(i=0;i<n;i++){
-        sums[2*n] += matrix[i][i];
-    }
-    sums[2*n+1] = 0;
-    for(i=0;i<n;i++){
-        sums[2*n+1] += matrix[i][n-1-i];
-    }
+        for(i=0;i<n;i++){
+            sums[i+n] = 0;
+            for(j=0;j<n;j++){
+                sums[i+n] += matrix[j][i];
+            }
+        }
 
-    bool result = true;
-    for(i=0;i<2*n+1;i++){
-        if(sums[i] != sums[i+1]){cout << "no" << endl;result = false;break;}
-    }
-    if(result == true){cout << "yes" << endl;}
+        sums[2*n] = 0;
+        for(i=0;i<n;i++){
+            sums[2*n] += matrix[i][i];
+        }
+        sums[2*n+1] = 0;
+        for(i=0;i<n;i++){
+            sums[2*n+1] += matrix[i][n-1-i];
+        }
+
+        bool result = true;
+        for(i=0;i<2*n+1;i++){
+            if(sums[i] != sums[i+1]){cout << "no" << endl;result = false;break;}
+        }
+        if(result == true){cout << "yes" << endl;}
+    } 
 }

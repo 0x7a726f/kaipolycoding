@@ -1,0 +1,42 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+char cipher(char gramma , int distance){
+    return gramma + distance;
+}
+char lower(char ch) {
+    if(ch >= 'A' || ch <= 'Z'){
+        return ch - 'A' + 'a';
+    }
+    else{return ch;}
+    }
+char charlist[26] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+char distancelist[26];
+int i;
+string text = "";string result = "";
+int main(){
+    for(i=0;i<25;i++){
+        char temp;
+        cin >> temp;
+        distancelist[i] = charlist[i] - temp;
+    }
+    cin.ignore();
+    char c;
+    c = getchar();
+    while(c != EOF){
+        text += c;
+        c = getchar();
+    }
+    int N;
+    N = text.length();
+    for(i=0;i<N;i++){
+        if((text[i] >= 'a' && text[i] <= 'z') || (text[i] >= 'A' && text[i] <= 'Z')){
+            result += cipher(text[i],distancelist[abs('a'- lower(text[i]))]);
+        }
+        else{result += text[i];}
+    }
+    cout << result;
+
+}

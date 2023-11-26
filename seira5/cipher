@@ -1,42 +1,48 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
-
-char cipher(char gramma , int distance){
-    return gramma + distance;
-}
+char cipher(char gramma , int distance){return gramma + distance;}
 char lower(char ch) {
-    if(ch >= 'A' || ch <= 'Z'){
-        return ch - 'A' + 'a';
-    }
+    if(ch >= 'A' || ch <= 'Z'){return ch - 'A' + 'a';}
     else{return ch;}
     }
-char charlist[26] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-char distancelist[26];
-int i;
+int distancelist[26];
+char cipherlist[26];
+int i,j;
+char c;
 string text = "";string result = "";
 int main(){
-    for(i=0;i<25;i++){
+    for(i=0;i<26;i++){
         char temp;
         cin >> temp;
-        distancelist[i] = charlist[i] - temp;
+        cipherlist[i] = temp;
+        distancelist[i] = -(int)'a'-i+(int)temp;
     }
-    cin.ignore();
-    char c;
-    c = getchar();
-    while(c != EOF){
-        text += c;
-        c = getchar();
+    int skip = 0;
+    for(i=0;i<26;i++){
+        if((int)cipherlist[i] < 'a' || (int)cipherlist[i] > 'z'){skip = 1;}
     }
-    int N;
-    N = text.length();
-    for(i=0;i<N;i++){
-        if((text[i] >= 'a' && text[i] <= 'z') || (text[i] >= 'A' && text[i] <= 'Z')){
-            result += cipher(text[i],distancelist[abs('a'- lower(text[i]))]);
+    for(i=0;i<26;i++){
+        int count = 0;
+        for(j=1;j<26;j++){
+            if((int)cipherlist[j]-(int)'a'-i == 0){count+=1;}
         }
-        else{result += text[i];}
+        if(count>1){skip=1;break;}
     }
-    cout << result;
-
+    if(skip == 1){cout<< "error" << endl;}
+    else{
+        cin.ignore();
+        c = getchar();
+        while(c != EOF){
+            text += c;
+            c = getchar();
+        }
+        int N = text.length();
+        for(i=0;i<N;i++){
+            if(text[i] >= 'a' && text[i] <= 'z'){result += cipher(text[i],distancelist[abs((int)('a'- text[i]))]);}
+            else if(text[i] >= 'A' && text[i] <= 'Z'){result += cipher(text[i],distancelist[abs((int)('a'- lower(text[i])))]);}
+            else{result += text[i];}
+        }
+        cout << result;
+    }
 }

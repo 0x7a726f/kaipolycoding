@@ -69,8 +69,6 @@ int main(){
                 i = 0;
                 linetext = "";
                 sum = 0;
-
         }
-
     }
 }

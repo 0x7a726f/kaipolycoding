@@ -45,12 +45,16 @@ void list::add(int k, int x){
         p->next = head;
         head = p;
     }
-    else{
+    else {
         node *q = head;
         node *p = new node;
         p->info = x;
-        int i = 0;
-        for(node *q = head; q != nullptr; q = q->next){if(i==k-1){break;}i++;}
+        int i = 1;
+        while(q->next != nullptr){
+            if(i == k - 1){break;}
+            q = q->next;
+            i++;
+        }
         p->next = q->next;
         q->next = p;
     }
@@ -60,8 +64,11 @@ int list::get(int k){
     if(head != nullptr && k == 1){return head->info;}
     else{
         node *q = head;
-        int i = 0;
-        for(q = head; q != nullptr; q = q->next){if(i==k){break;}i++;}
+        int i = 1;
+        while (q != nullptr && i < k) {
+            q = q->next;
+            i++;
+        }
         return q->info;
     }
 }
@@ -79,13 +86,25 @@ void list::remove(int k){
         }
     }
 }
+
 int main(){
+    ios_base::sync_with_stdio(false);
     list a;
-    a.add(1,1);
-    a.add(2,2);
-    //a.add(3,3);
-    //a.add(2,4);
-    a.remove(1);
-    a.remove(1);
-    cout << a.empty();
+    int n;
+    cin >> n;
+    for(int i = 0;i<n;i++){
+        int k;int x;
+        cin >> k >> x;
+        a.add(k,x);
+    }
+    int d;
+    cin >> d;
+    for(int i = 0;i<d;i++){
+        int del;
+        cin >> del;
+        a.remove(del);
+    }
+    int res;
+    cin >> res;
+    cout << a.size() << " " << a.get(res) << '\n';
 }

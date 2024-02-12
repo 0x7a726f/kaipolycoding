@@ -66,7 +66,7 @@ int list::get(int k){
     else{
         node *q = head;
         int i = 1;
-        while (q != nullptr && i < k) {
+        while(q != nullptr && i < k){
             q = q->next;
             i++;
         }
@@ -94,8 +94,8 @@ int list::searchMF(int x) {
     node *prev = nullptr;
     node *curr = head;
     int pos = 1;
-    while (curr != nullptr) {
-        if (curr->info == x) {
+    while(curr != nullptr){
+        if(curr->info == x){
             prev->next = curr->next;
             curr->next = head;
             head = curr;

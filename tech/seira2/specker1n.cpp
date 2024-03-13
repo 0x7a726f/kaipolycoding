@@ -90,7 +90,3 @@ class State {
         int Playing;
         void Play(){Playing == PlayerTotal - 1 ? Playing = 0 : Playing++;}
 };
-
-
-
-

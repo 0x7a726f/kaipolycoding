@@ -2,7 +2,7 @@
 using namespace std;
 class lexicon{
     public:
-        lexicon() {root = nullptr;}
+        lexicon(){root = nullptr;}
 
         ~lexicon(){root = nullptr;}
 

@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-ios_base::sync_with_stdio(false);
 int main(){
+    ios_base::sync_with_stdio(false);
     int vertex;
     int edge;
     cin >> vertex >> edge;

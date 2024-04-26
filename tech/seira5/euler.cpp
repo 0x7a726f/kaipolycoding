@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-ios_base::sync_with_stdio(false)
+ios_base::sync_with_stdio(false);
 int main(){
     int vertex;
     int edge;

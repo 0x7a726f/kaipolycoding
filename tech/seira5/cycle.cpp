@@ -16,8 +16,7 @@ class Graph {
         bool cycle(vector<int> &path) const{
             vector<bool> visited(size, false);
             vector<bool> recStack(size, false);
-            stack<int> dfsStack;
-
+            stack<int> dfsStack;
             for(int i = 0; i < size; i++){
                 if(dfs(i, visited, recStack, dfsStack, path)){return true;}
             }

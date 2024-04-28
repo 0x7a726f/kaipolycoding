@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <stack>
-#include <algorithm>
 using namespace std;
 class Graph {
     public:
@@ -36,11 +35,10 @@ class Graph {
                     if(!visited[u] && dfs(u, visited, recStack, dfsStack, path)){return true;} 
                     else if(recStack[u]){//back-edge wowow
                         while(!dfsStack.empty() && dfsStack.top() != u){
-                            path.push_back(dfsStack.top());
+                            path.insert(path.begin(),dfsStack.top());
                             dfsStack.pop();
                         }
-                        path.push_back(u);
-                        reverse(path.begin(), path.end());
+                        path.insert(path.begin(),u);
                         return true;
                     }
                 }

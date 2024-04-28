@@ -1,32 +1,51 @@
 #include <iostream>
 #include <vector>
+#include <stack>
+#include <algorithm>
 using namespace std;
 class Graph {
     public:
-        Graph(int V){
-            size = V;
-            VertexList = new node*[V];
-            for(int i = 0;i < V;i++){
-                VertexList[i] = new node;
-            }
-        }
+        Graph(int V){VertexList = new vector<int>[V];size = V;}
 
         ~Graph(){
-            for(int i = 0;i < size;i++){
-                delete VertexList[i];
-            }
+            for(int i = 0;i < VertexList->size();i++){VertexList[i].clear();}
             delete [] VertexList;
         }
 
-        void addEdge(int u, int v){
-            VertexList[u]->AdjList.push_back(v);
-        }
+        void addEdge(int u, int v){VertexList[u].push_back(v);}
 
-        //bool cycle(vector<int> &path) const;
+        bool cycle(vector<int> &path) const{
+            vector<bool> visited(size, false);
+            vector<bool> recStack(size, false);
+            stack<int> dfsStack;
+
+            for(int i = 0; i < size; i++){
+                if(dfs(i, visited, recStack, dfsStack, path)){return true;}
+            }
+            return false;
+        }
     private:
         int size;
-        struct node{
-            vector<int> AdjList;
-        };
-        node** VertexList;   
+        vector<int>* VertexList;   
+        bool dfs(int v, vector<bool>& visited, vector<bool>& recStack, stack<int>& dfsStack, vector<int>& path) const{
+            if(!visited[v]){
+                visited[v] = true;
+                recStack[v] = true;
+                dfsStack.push(v);
+                for(int u : VertexList[v]){
+                    if(!visited[u] && dfs(u, visited, recStack, dfsStack, path)){return true;} 
+                    else if(recStack[u]){//back-edge wowow
+                        while(!dfsStack.empty() && dfsStack.top() != u){
+                            path.push_back(dfsStack.top());
+                            dfsStack.pop();
+                        }
+                        path.push_back(u);
+                        reverse(path.begin(), path.end());
+                        return true;
+                    }
+                }
+            }
+            recStack[v] = false;
+            return false;
+        }
 };

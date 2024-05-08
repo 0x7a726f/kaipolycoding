@@ -46,6 +46,5 @@ int main(){
         cin >> temp1 >> temp2;  
         union1.unify(temp1,temp2);  
     }  
-    if(union1.getNumSets()-k >= 1){cout << union1.getNumSets()-k << endl;}   
-    else{cout << 1 << endl;}  
+    union1.getNumSets()-k >= 1? cout << union1.getNumSets()-k << endl : cout << 1 << endl;   
 }  
